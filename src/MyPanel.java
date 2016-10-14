@@ -41,6 +41,7 @@ public class MyPanel extends JPanel {
             for (int y = 1; y < TOTAL_ROWS; y++) {
                 colorArray[x][y] = Color.WHITE;
             }
+            colorArray[0][0] = Color.PINK;
         }
     }
     public void paintComponent(Graphics g) {
