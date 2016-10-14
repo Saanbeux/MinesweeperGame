@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -123,34 +124,34 @@ public class MyMouseAdapter extends MouseAdapter {
 							//start game
 						}else{
 							if (!gameOver){
-							if ((gridX == 0) || (gridY == 0)) {
-								//On the left column and on the top row... do nothing]
-							}else{
-								if (mineArray[gridX][gridY]){
-									for (int i=1;i<10;i++){
-										for (int j=1;j<10;j++){
-											if(mineArray[i][j]){
-												myPanel.colorArray[i][j] = Color.BLACK;
-												gameOver = true;
-											}}}
-									myPanel.repaint();
-									return;
-								}else {
-									if (!sweepedSpace[gridX][gridY]){
-										reveal(gridX,gridY);
+								if ((gridX == 0) || (gridY == 0)) {
+									//On the left column and on the top row... do nothing]
+								}else{
+									if (mineArray[gridX][gridY]){
 										for (int i=1;i<10;i++){
 											for (int j=1;j<10;j++){
-												if (sweepedSpace[i][j] && !mineArray[i][j]){
-													myPanel.colorArray[i][j] = setColors(i,j);
-												}else{
-													// do nothing
+												if(mineArray[i][j]){
+													myPanel.colorArray[i][j] = Color.BLACK;
+													gameOver = true;
+												}}}
+										myPanel.repaint();
+										return;
+									}else {
+										if (!sweepedSpace[gridX][gridY]){
+											reveal(gridX,gridY);
+											for (int i=1;i<10;i++){
+												for (int j=1;j<10;j++){
+													if (sweepedSpace[i][j] && !mineArray[i][j]){
+														myPanel.colorArray[i][j] = setColors(i,j);
+													}else{
+														// do nothing
+													}
 												}
 											}
 										}
 									}
-								}
-								myPanel.repaint();
-							}}}}}
+									myPanel.repaint();
+								}}}}}
 			}
 			break;
 		case 3:        //Right mouse button
@@ -199,13 +200,12 @@ public class MyMouseAdapter extends MouseAdapter {
 	}
 
 	public void randomBombs(){
-		int row, column;
-		for (int i=0;i<10;i++){
+		int row , column;
+			for (int x=0; x<10;x++){
 			row = generator.nextInt(9)+1;
 			column = generator.nextInt(9)+1;
 			mineArray[row][column] = true;
-		}
-	}
+						}}
 	public Color setColors(int i, int j){
 		int colorID = preparedSpace[i][j];
 		Color newColor = null;
@@ -217,10 +217,10 @@ public class MyMouseAdapter extends MouseAdapter {
 			newColor = Color.cyan;
 			break;
 		case 2:
-			newColor = Color.YELLOW;
+			newColor = Color.GREEN;
 			break;
 		case 3:
-			newColor = Color.GREEN;
+			newColor = Color.YELLOW;
 			break;
 		case 4:
 			newColor = new Color(0x964B00);  //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
@@ -347,5 +347,4 @@ public class MyMouseAdapter extends MouseAdapter {
 									if (mineArray[i][j]){
 										counter++;
 									}}}}}}}}return preparedSpace[x][y] = counter;}
-
 }
